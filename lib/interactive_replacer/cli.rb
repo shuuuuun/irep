@@ -5,7 +5,7 @@ module InteractiveReplacer
     def self.execute(stdout, argv = [])
       # puts "argv: #{argv}"
       opts, args = parse_options argv
-      # stdout.print op.help
+      # stdout.print parser.help
       puts "opts: #{opts}"
       puts "args: #{args}"
     end
@@ -13,28 +13,36 @@ module InteractiveReplacer
     def self.parse_options(argv = [])
       options = {}
 
-      op = OptionParser.new
-      op.on('--interactive') { |v| options[:interactive] = v }
-      op.on('--directory VAL') { |v| options[:directory] = v }
-      op.on('--file VAL') { |v| options[:file] = v }
-      op.on('--ignore-case') { |v| options[:ignore_case] = true }
-      op.on('--count') { |v| options[:count] = true }
-      op.on('--files-without-matches') { |v| options[:files_without_matches] = true }
-      op.on('--literal') { |v| options[:literal] = true }
-      op.on('--regexp') { |v| options[:regexp] = true }
-      op.on('--smart-case') { |v| options[:smart_case] = true }
-      op.on('--show-hidden-files') { |v| options[:show_hidden_files] = true }
-      op.on('--dry-run') { |v| options[:dry_run] = true }
+      parser.on('--interactive') { |v| options[:interactive] = v }
+      parser.on('--directory VAL') { |v| options[:directory] = v }
+      parser.on('--file VAL') { |v| options[:file] = v }
+      parser.on('--ignore-case') { |v| options[:ignore_case] = true }
+      parser.on('--count') { |v| options[:count] = true }
+      parser.on('--files-without-matches') { |v| options[:files_without_matches] = true }
+      parser.on('--literal') { |v| options[:literal] = true }
+      parser.on('--regexp') { |v| options[:regexp] = true }
+      parser.on('--smart-case') { |v| options[:smart_case] = true }
+      parser.on('--show-hidden-files') { |v| options[:show_hidden_files] = true }
+      parser.on('--dry-run') { |v| options[:dry_run] = true }
 
       begin
-        # op.parse!(argv)
-        arguments = op.parse(argv)
+        # parser.parse!(argv)
+        arguments = parser.parse(argv)
       rescue OptionParser::InvalidOption => e
-        # usage e.message
-        puts "error: #{e.message}"
+        usage e.message
       end
 
       [options, arguments]
+    end
+
+    def self.usage(msg = nil)
+      puts parser.help
+      puts "error: #{msg}" if msg
+      exit 1
+    end
+
+    def self.parser
+      @@parser ||= OptionParser.new
     end
   end
 end
