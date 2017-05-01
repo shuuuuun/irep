@@ -1,4 +1,6 @@
 require 'optparse'
+require 'interactive_replacer/search'
+require 'interactive_replacer/replace'
 
 module InteractiveReplacer
   class CLI
@@ -6,13 +8,26 @@ module InteractiveReplacer
       # puts "argv: #{argv}"
       opts, args = parse_options argv
       # stdout.print parser.help
-      puts "opts: #{opts}"
-      puts "args: #{args}"
+      # puts "opts: #{opts}"
+      # puts "args: #{args}"
+
+      search = InteractiveReplacer::Search.new
+      search.find_in_file('tmp/README.md', 'README')
+      # search.find_in_file('README.md', 'InteractiveReplacer')
+      # search.find_in_file_recursive('tmp', 'README')
+
+      replace = InteractiveReplacer::Replace.new search
+      # options[:interactive]
+      replace.replace_in_file_interactive('tmp/README.md', 'README', 'HOGE')
+      # replace.replace_in_file_recursive('tmp', 'README', 'HOGE')
+      # replace.replace_filename('tmp', 'README', 'HOGE')
+      # replace.replace_directory('tmp', 'db', 'hoge')
     end
 
     def self.parse_options(argv = [])
       options = {}
 
+      parser.on('--only-search') { |v| options[:only_search] = true }
       parser.on('--interactive') { |v| options[:interactive] = v }
       parser.on('--directory VAL') { |v| options[:directory] = v }
       parser.on('--file VAL') { |v| options[:file] = v }
