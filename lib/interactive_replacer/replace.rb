@@ -1,6 +1,6 @@
 module InteractiveReplacer
   class Replace
-    def initialize(search)
+    def initialize(search=nil)
       @search = search
     end
 
@@ -11,6 +11,9 @@ module InteractiveReplacer
     end
 
     def replace_filename(path, before, after='')
+      target_file_paths(path).each do |file_path|
+        File.rename file_path, file_path.gsub(before, after)
+      end
     end
 
     def replace_in_file_recursive(path, before, after='')
