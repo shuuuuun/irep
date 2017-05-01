@@ -39,6 +39,14 @@ module InteractiveReplacer
         }
       end
       @results.concat current_results
+      show_results
+      @results
+    end
+
+    def show_results
+      @results.each do |result|
+        p result
+      end
     end
 
     private
