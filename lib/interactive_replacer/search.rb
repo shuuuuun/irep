@@ -29,13 +29,15 @@ module InteractiveReplacer
       # end
       match_data_list = match_global(file_text, search_text)
       current_results = match_data_list.map do |match_data|
+        line_num = match_line_num(file_text, match_data)
         {
           match_data: match_data,
           type: 'in_file', # in_file, directory, filename
           path: file_path, # 'path/to/file_or_directory'
           offset: match_data.begin(0), # x 全体の何文字目か
-          line: match_line_num(file_text, match_data), # y, row 行数
+          line: line_num, # y, row 行数
           colmun: match_colmun_num(file_text, match_data), # x, colmun その行の何文字目か
+          preview: extract_line(file_text, line_num, 1), # プレビュー表示するテキスト（マッチした行+数行）
         }
       end
       @results.concat current_results
@@ -59,6 +61,10 @@ module InteractiveReplacer
     def target_directory_paths(path)
       paths = Dir.glob "#{path}/**/*"
       paths.select { |path| File.directory?(path) }
+    end
+
+    def extract_line(text, line_num, size)
+      text.split("\n")[line_num - 1]
     end
 
     def match_line_num(text, match_data)
