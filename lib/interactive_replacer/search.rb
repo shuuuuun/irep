@@ -74,7 +74,7 @@ module InteractiveReplacer
 
     def match_colmun_num(text, match_data)
       offset = match_data.begin(0)
-      text.slice(0..offset).split("\n").last.size
+      text.slice(0..offset).split("\n").last.size - 1
     end
 
     def match_global(str, regexp)
