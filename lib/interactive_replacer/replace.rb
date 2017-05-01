@@ -8,6 +8,9 @@ module InteractiveReplacer
     end
 
     def replace_directory(path, before, after='')
+      target_directory_paths(path).each do |dir_path|
+        File.rename dir_path, dir_path.gsub(before, after)
+      end
     end
 
     def replace_filename(path, before, after='')
