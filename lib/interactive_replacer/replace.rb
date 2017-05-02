@@ -1,7 +1,8 @@
 module InteractiveReplacer
   class Replace
     def initialize(search=nil)
-      @search = search
+      @results = search.results
+      @delimiter = "\n"
     end
 
     def replace_all(path, before, after='')
@@ -33,7 +34,7 @@ module InteractiveReplacer
     def replace_in_file_interactive(file_path, before, after='')
       file_text = File.read(file_path)
       # puts gets, file_path, before, after
-      @search.results.each do |result|
+      @results.each do |result|
         puts result[:preview]
         print 'Replace [y,n,q,a,d,/,j,J,g,e,?]? '
         cmd = gets.chomp
@@ -53,7 +54,7 @@ module InteractiveReplacer
         end
       end
       replaced_text = file_text.split(before).map.with_index do |text, index|
-        result = @search.results[index]
+        result = @results[index]
         if !result
           text
         elsif result.fetch(:should_replace, nil)
