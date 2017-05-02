@@ -41,8 +41,9 @@ module InteractiveReplacer
         }
       end
       @results.concat current_results
-      show_results
-      @results
+      # @results.concat(current_results).uniq!
+      # show_results
+      # @results
     end
 
     def show_results
