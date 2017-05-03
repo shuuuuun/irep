@@ -41,7 +41,7 @@ module InteractiveReplacer
           # print 'Replace [y,n,q,a,d,/,j,J,g,e,?]? '
           print 'Replace [y,n,q]? '
           cmd = STDIN.gets.chomp
-          case cmd
+          case cmd.downcase
           when 'y'
             result[:should_replace] = true
             flag = false
