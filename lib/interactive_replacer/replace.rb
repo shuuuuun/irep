@@ -49,6 +49,7 @@ module InteractiveReplacer
             flag = false
           when 'q'
             flag = false
+            return
           end
         end
       end
