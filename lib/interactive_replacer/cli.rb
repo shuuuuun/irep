@@ -8,17 +8,24 @@ module InteractiveReplacer
       # puts "argv: #{argv}"
       opts, args = parse_options argv
       # stdout.print parser.help
-      # puts "opts: #{opts}"
-      # puts "args: #{args}"
+      puts "opts: #{opts}"
+      puts "args: #{args}"
+
+      # File.directory?(args[0])
+      puts('file required.') && return unless opts[:file]
+      puts('invalid args.') && return unless args[0] or args[1]
 
       search = InteractiveReplacer::Search.new
-      search.find_in_file('tmp/README.md', 'README')
+      # search.find_in_file('tmp/README.md', 'README')
+      search.find_in_file(opts[:file], args[0])
       # search.find_in_file('README.md', 'InteractiveReplacer')
       # search.find_in_file_recursive('tmp', 'README')
 
       replace = InteractiveReplacer::Replace.new search
+      # replace = InteractiveReplacer::Replace.new
       # options[:interactive]
-      replace.replace_in_file_interactive('tmp/README.md', 'README', 'HOGE')
+      # replace.replace_in_file_interactive('tmp/README.md', 'README', 'HOGE')
+      replace.replace_in_file_interactive(opts[:file], args[0], args[1])
       # replace.replace_in_file_recursive('tmp', 'README', 'HOGE')
       # replace.replace_filename('tmp', 'README', 'HOGE')
       # replace.replace_directory('tmp', 'db', 'hoge')

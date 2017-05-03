@@ -1,7 +1,7 @@
 module InteractiveReplacer
   class Replace
     def initialize(search=nil)
-      @results = search.results
+      @results = search ? search.results : []
       @delimiter = "\n"
     end
 
@@ -38,10 +38,11 @@ module InteractiveReplacer
         puts result[:preview]
         # print 'Replace [y,n,q,a,d,/,j,J,g,e,?]? '
         print 'Replace [y,n]? '
-        cmd = gets.chomp
+        # cmd = gets.chomp
+        cmd = STDIN.gets.chomp
         case cmd
         when 'y'
-          puts result
+          # puts result
           result[:should_replace] = true
         end
       end
