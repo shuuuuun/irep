@@ -35,15 +35,21 @@ module InteractiveReplacer
       file_text = File.read(file_path)
       # puts gets, file_path, before, after
       @results.each do |result|
-        puts result[:preview]
-        # print 'Replace [y,n,q,a,d,/,j,J,g,e,?]? '
-        print 'Replace [y,n]? '
-        # cmd = gets.chomp
-        cmd = STDIN.gets.chomp
-        case cmd
-        when 'y'
-          # puts result
-          result[:should_replace] = true
+        flag = true
+        while flag
+          puts result[:preview]
+          # print 'Replace [y,n,q,a,d,/,j,J,g,e,?]? '
+          print 'Replace [y,n,q]? '
+          cmd = STDIN.gets.chomp
+          case cmd
+          when 'y'
+            result[:should_replace] = true
+            flag = false
+          when 'n'
+            flag = false
+          when 'q'
+            flag = false
+          end
         end
       end
       replaced_text = file_text.split(before).map.with_index do |text, index|
