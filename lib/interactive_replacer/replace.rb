@@ -31,12 +31,19 @@ module InteractiveReplacer
       File.write(file_path, txt)
     end
 
+    def replace_in_file_recursive_interactive(path, before, after='')
+      target_file_paths(path).each do |file_path|
+        replace_in_file_interactive(file_path, before, after)
+      end
+    end
+
     def replace_in_file_interactive(file_path, before, after='')
       file_text = File.read(file_path)
       # puts gets, file_path, before, after
       @results.each do |result|
         flag = true
         while flag
+          puts result[:path]
           puts result[:preview]
           # print 'Replace [y,n,q,a,d,/,j,J,g,e,?]? '
           print 'Replace [y,n,q]? '
@@ -53,6 +60,7 @@ module InteractiveReplacer
           end
         end
       end
+      # 文字列を特定位置で分割して配列にしたい
       replaced_text = file_text.split(before).map.with_index do |text, index|
         result = @results[index]
         if !result
