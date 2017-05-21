@@ -53,11 +53,11 @@ module InteractiveReplacer
         cmd: 'q'
       }])
       @results.each do |result|
-        interface.exec({
+        interface.listen(
           path: result[:path],
           preview: result[:preview],
           proc_args: [result]
-        })
+        )
       end
       # 文字列を特定位置で分割して配列にしたい
       # p file_text.split(before)

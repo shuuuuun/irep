@@ -5,7 +5,7 @@ module InteractiveReplacer
       @message = message
     end
 
-    def exec(opts = {})
+    def listen(opts = {})
       flag = true
       while flag
         puts opts[:path]
