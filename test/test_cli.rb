@@ -18,7 +18,7 @@ class TestCLI < Test::Unit::TestCase
   def test_simple
     create_test_data('simple.txt', 'aaa')
     # ユーザー入力をmock化したい
-    execute('--directory . aaa bbb')
+    execute('aaa bbb')
     assert_equal read_test_data('simple.txt'), 'bbb'
 #     assert_equal <<EOF, execute('aaa')
 # aaa.txt:1:aaa

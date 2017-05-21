@@ -34,7 +34,9 @@ module InteractiveReplacer
     end
 
     def self.parse_options(argv = [])
-      options = {}
+      options = {
+        directory: '.'
+      }
 
       parser.on('--only-search') { |v| options[:only_search] = true }
       parser.on('--interactive') { |v| options[:interactive] = v }
