@@ -1,3 +1,5 @@
+require 'interactive_replacer/interface'
+
 module InteractiveReplacer
   class Replace
     def initialize(search=nil)
@@ -41,24 +43,39 @@ module InteractiveReplacer
       file_text = File.read(file_path)
       # puts gets, file_path, before, after
       @results.each do |result|
-        flag = true
-        while flag
-          puts result[:path]
-          puts result[:preview]
-          # print 'Replace [y,n,q,a,d,/,j,J,g,e,?]? '
-          print 'Replace [y,n,q]? '
-          cmd = STDIN.gets.chomp
-          case cmd.downcase
-          when 'y'
-            result[:should_replace] = true
-            flag = false
-          when 'n'
-            flag = false
-          when 'q'
-            flag = false
-            return
-          end
-        end
+        Interface.exec({
+          path: result[:path],
+          preview: result[:preview],
+          message: 'Replace',
+          cases: [{
+            cmd: 'y',
+            func: proc {
+              result[:should_replace] = true
+            }
+          }, {
+            cmd: 'n'
+          }, {
+            cmd: 'q'
+          }]
+        })
+        # flag = true
+        # while flag
+        #   puts result[:path]
+        #   puts result[:preview]
+        #   # print 'Replace [y,n,q,a,d,/,j,J,g,e,?]? '
+        #   print 'Replace [y,n,q]? '
+        #   cmd = STDIN.gets.chomp
+        #   case cmd.downcase
+        #   when 'y'
+        #     result[:should_replace] = true
+        #     flag = false
+        #   when 'n'
+        #     flag = false
+        #   when 'q'
+        #     flag = false
+        #     return
+        #   end
+        # end
       end
       # 文字列を特定位置で分割して配列にしたい
       # p file_text.split(before)
