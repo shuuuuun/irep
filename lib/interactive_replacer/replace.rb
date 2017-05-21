@@ -61,16 +61,23 @@ module InteractiveReplacer
         end
       end
       # 文字列を特定位置で分割して配列にしたい
-      replaced_text = file_text.split(before).map.with_index do |text, index|
-        result = @results[index]
-        if !result
-          text
-        elsif result.fetch(:should_replace, nil)
-          text + after
+      # p file_text.split(before)
+      # p file_text.partition(before)
+      result_index = 0
+      replaced_text = file_text.partition(before).map do |text|
+        if text == before
+          result = @results[result_index]
+          result_index += 1
+          if result.fetch(:should_replace, nil)
+            after
+          else
+            text
+          end
         else
-          text + before
+          text
         end
       end.join('')
+      # p replaced_text
       File.write(file_path, replaced_text)
     end
 
