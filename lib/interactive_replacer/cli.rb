@@ -12,32 +12,32 @@ module InteractiveReplacer
       puts "args: #{args}"
 
       # File.directory?(args[0])
-      puts('file or directory required.') && return unless opts[:file] or opts[:directory]
-      puts('invalid args.') && return unless args[0] or args[1]
+      # puts('file or directory required.') && return unless opts[:file] or opts[:directory]
+      # puts('invalid args.') && return unless args[0] or args[1]
+      puts('invalid args.') && return unless args[0]
 
       search = InteractiveReplacer::Search.new
-      # search.find_in_file('tmp/README.md', 'README')
       # search.find_in_file(opts[:file], args[0])
       search.find_in_file_recursive(opts[:directory], args[0])
-      # search.find_in_file('README.md', 'InteractiveReplacer')
-      # search.find_in_file_recursive('tmp', 'README')
 
+      unless opts[:replace]
+        search.show_results
+        return
+      end
       replace = InteractiveReplacer::Replace.new search
-      # replace = InteractiveReplacer::Replace.new
-      # options[:interactive]
-      # replace.replace_in_file_interactive('tmp/README.md', 'README', 'HOGE')
       # replace.replace_in_file_interactive(opts[:file], args[0], args[1])
       replace.replace_in_file_recursive_interactive(opts[:directory], args[0], args[1])
-      # replace.replace_in_file_recursive('tmp', 'README', 'HOGE')
       # replace.replace_filename('tmp', 'README', 'HOGE')
       # replace.replace_directory('tmp', 'db', 'hoge')
     end
 
     def self.parse_options(argv = [])
       options = {
-        directory: '.'
+        directory: '.',
+        replace: true
       }
 
+      parser.on('--[no-]replace') { |v| options[:replace] = v }
       parser.on('--only-search') { |v| options[:only_search] = true }
       parser.on('--interactive') { |v| options[:interactive] = v }
       parser.on('--directory VAL') { |v| options[:directory] = v }

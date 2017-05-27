@@ -34,6 +34,12 @@ class TestCLI < Test::Unit::TestCase
     assert_equal read_test_data('simple_n.txt'), 'aaa'
   end
 
+  def test_simple_no_replace
+    create_test_data('simple_no_replace.txt', 'aaa')
+    execute('--no-replace aaa bbb')
+    assert_equal read_test_data('simple_no_replace.txt'), 'aaa'
+  end
+
   private
 
   # ファイルの読み書きもmock化したほうがいいかも

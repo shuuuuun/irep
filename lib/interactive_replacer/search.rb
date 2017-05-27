@@ -47,6 +47,7 @@ module InteractiveReplacer
     end
 
     def show_results
+      puts('no search results.') && return if @results.empty?
       @results.each do |result|
         p result
       end
