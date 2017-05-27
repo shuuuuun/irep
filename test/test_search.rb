@@ -14,12 +14,12 @@ class TestSearch < Test::Unit::TestCase
     create_test_data(filename, '')
 
     search = InteractiveReplacer::Search.new
-    search.find_filename(filename, 'test')
+    search.find_filename(@tmp_dir, 'test_find_filename')
 
     result = search.results[0]
     assert_equal search.results.size, 1
     assert_equal result[:type], 'filename'
-    assert_equal result[:path], filename
+    assert_equal result[:path], File.join(@tmp_dir, filename)
   end
 
   def test_find_in_file
