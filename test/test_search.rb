@@ -9,6 +9,19 @@ class TestSearch < Test::Unit::TestCase
     Dir.chdir @tmp_dir
   end
 
+  def test_find_filename
+    filename = 'test_find_filename.txt'
+    create_test_data(filename, '')
+
+    search = InteractiveReplacer::Search.new
+    search.find_filename(filename, 'test')
+
+    result = search.results[0]
+    assert_equal search.results.size, 1
+    assert_equal result[:type], 'filename'
+    assert_equal result[:path], filename
+  end
+
   def test_find_in_file
     filename = 'test_find_in_file.txt'
     text = 'test text'
