@@ -13,6 +13,16 @@ module InteractiveReplacer
     end
 
     def find_filename(path, search_text)
+      match_file_list = target_file_paths(path).select do |file_path|
+        file_path.include?(search_text)
+      end
+      current_results = match_file_list.map do |file_path|
+        {
+          type: 'filename',
+          path: file_path,
+        }
+      end
+      @results.concat current_results
     end
 
     def find_in_file_recursive(path, search_text)
