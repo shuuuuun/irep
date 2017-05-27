@@ -58,6 +58,20 @@ class TestSearch < Test::Unit::TestCase
     assert_equal result[:preview], text
   end
 
+  def test_find_in_file_recursive
+    filename_1 = 'find_in_file_recursive_1.txt'
+    filename_2 = 'find_in_file_recursive_2.txt'
+    text = 'test text test'
+    create_test_data(filename_1, text)
+    create_test_data(filename_2, text)
+
+    search = InteractiveReplacer::Search.new directory: @tmp_dir, search_text: 'test'
+    search.find_in_file_recursive
+
+    result = search.results[0]
+    assert_equal search.results.size, 4
+  end
+
   private
 
   # TODO: テストケースごとにディレクトリ切ったほうがいいかも
