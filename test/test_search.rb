@@ -13,8 +13,8 @@ class TestSearch < Test::Unit::TestCase
     filename = 'test_find_filename.txt'
     create_test_data(filename, '')
 
-    search = InteractiveReplacer::Search.new
-    search.find_filename(@tmp_dir, 'test_find_filename')
+    search = InteractiveReplacer::Search.new directory: @tmp_dir
+    search.find_filename('test_find_filename')
 
     result = search.results[0]
     assert_equal search.results.size, 1
@@ -27,7 +27,7 @@ class TestSearch < Test::Unit::TestCase
     text = 'test text'
     create_test_data(filename, text)
 
-    search = InteractiveReplacer::Search.new
+    search = InteractiveReplacer::Search.new directory: @tmp_dir
     search.find_in_file(filename, text)
 
     result = search.results[0]

@@ -2,18 +2,19 @@ module InteractiveReplacer
   class Search
     attr_reader :results
 
-    def initialize
+    def initialize(opts = {})
       @results = []
+      @directory = opts[:directory]
     end
 
-    def find_all(path, search_text)
+    def find_all(search_text)
     end
 
-    def find_directory(path, search_text)
+    def find_directory(search_text)
     end
 
-    def find_filename(path, search_text)
-      match_file_list = target_file_paths(path).select do |file_path|
+    def find_filename(search_text)
+      match_file_list = target_file_paths.select do |file_path|
         file_path.include?(search_text)
       end
       current_results = match_file_list.map do |file_path|
@@ -25,8 +26,8 @@ module InteractiveReplacer
       @results.concat current_results
     end
 
-    def find_in_file_recursive(path, search_text)
-      target_file_paths(path).each do |file_path|
+    def find_in_file_recursive(search_text)
+      target_file_paths.each do |file_path|
         find_in_file(file_path, search_text)
       end
     end
@@ -65,15 +66,15 @@ module InteractiveReplacer
 
     private
 
-    def target_file_paths(path)
+    def target_file_paths
       # TODO: ignore
-      paths = Dir.glob "#{path}/**/*"
+      paths = Dir.glob "#{@directory}/**/*"
       paths.reject { |path| File.directory?(path) }
     end
 
-    def target_directory_paths(path)
+    def target_directory_paths
       # TODO: ignore
-      paths = Dir.glob "#{path}/**/*"
+      paths = Dir.glob "#{@directory}/**/*"
       paths.select { |path| File.directory?(path) }
     end
 
