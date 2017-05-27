@@ -1,6 +1,8 @@
 require 'fileutils'
-require 'interactive_replacer/cli'
+require 'test/unit/rr'
 require 'test_helper'
+require 'interactive_replacer/cli'
+require 'interactive_replacer/interface'
 
 class TestCLI < Test::Unit::TestCase
   def setup
@@ -16,8 +18,8 @@ class TestCLI < Test::Unit::TestCase
   end
 
   def test_simple
+    stub(InteractiveReplacer::Interface).get_input { 'y' }
     create_test_data('simple.txt', 'aaa')
-    # ユーザー入力をmock化したい
     execute('aaa bbb')
     assert_equal read_test_data('simple.txt'), 'bbb'
 #     assert_equal <<EOF, execute('aaa')
