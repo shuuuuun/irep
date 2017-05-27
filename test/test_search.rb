@@ -10,20 +10,21 @@ class TestSearch < Test::Unit::TestCase
   end
 
   def test_find_in_file
-    file_path = 'simple.txt'
-    create_test_data(file_path, 'text')
+    filename = 'test_find_in_file.txt'
+    text = 'test text'
+    create_test_data(filename, text)
 
     search = InteractiveReplacer::Search.new
-    search.find_in_file(file_path, 'text')
+    search.find_in_file(filename, text)
 
     result = search.results[0]
     assert_equal search.results.size, 1
     assert_equal result[:type], 'in_file'
-    assert_equal result[:path], file_path
+    assert_equal result[:path], filename
     assert_equal result[:offset], 0
     assert_equal result[:line], 1
     assert_equal result[:colmun], 0
-    assert_equal result[:preview], 'text'
+    assert_equal result[:preview], text
   end
 
   private
