@@ -17,14 +17,21 @@ class TestCLI < Test::Unit::TestCase
     # Dir.chdir(@before_dir)
   end
 
-  def test_simple
+  def test_simple_y
     stub(InteractiveReplacer::Interface).get_input { 'y' }
-    create_test_data('simple.txt', 'aaa')
+    create_test_data('simple_y.txt', 'aaa')
     execute('aaa bbb')
-    assert_equal read_test_data('simple.txt'), 'bbb'
+    assert_equal read_test_data('simple_y.txt'), 'bbb'
 #     assert_equal <<EOF, execute('aaa')
 # aaa.txt:1:aaa
 # EOF
+  end
+
+  def test_simple_n
+    stub(InteractiveReplacer::Interface).get_input { 'n' }
+    create_test_data('simple_n.txt', 'aaa')
+    execute('aaa bbb')
+    assert_equal read_test_data('simple_n.txt'), 'aaa'
   end
 
   private
