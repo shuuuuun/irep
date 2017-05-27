@@ -9,6 +9,19 @@ class TestSearch < Test::Unit::TestCase
     Dir.chdir @tmp_dir
   end
 
+  def test_find_directory
+    directory = 'test_find_directory'
+    FileUtils.mkdir_p File.join(@tmp_dir, directory)
+
+    search = InteractiveReplacer::Search.new directory: @tmp_dir
+    search.find_directory('test_find_directory')
+
+    result = search.results[0]
+    assert_equal search.results.size, 1
+    assert_equal result[:type], 'directory'
+    assert_equal result[:path], File.join(@tmp_dir, directory)
+  end
+
   def test_find_filename
     filename = 'test_find_filename.txt'
     create_test_data(filename, '')
