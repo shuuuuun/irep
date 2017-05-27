@@ -42,7 +42,8 @@ class TestCLI < Test::Unit::TestCase
 
   private
 
-  # ファイルの読み書きもmock化したほうがいいかも
+  # TODO: テストケースごとにディレクトリ切ったほうがいいかも
+  # TODO: ファイルの読み書きもmock化したほうがいいかも？
   def create_test_data(file, text)
     File.write(File.join(@tmp_dir, file), text)
   end

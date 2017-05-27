@@ -50,7 +50,10 @@ module InteractiveReplacer
       }, {
         cmd: 'n'
       }, {
-        cmd: 'q'
+        cmd: 'q',
+        func: proc {
+          # TODO: quit
+        }
       }])
       @results.each do |result|
         interface.listen(

@@ -56,11 +56,13 @@ module InteractiveReplacer
     private
 
     def target_file_paths(path)
+      # TODO: ignore
       paths = Dir.glob "#{path}/**/*"
       paths.reject { |path| File.directory?(path) }
     end
 
     def target_directory_paths(path)
+      # TODO: ignore
       paths = Dir.glob "#{path}/**/*"
       paths.select { |path| File.directory?(path) }
     end
