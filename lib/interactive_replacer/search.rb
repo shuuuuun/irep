@@ -5,14 +5,12 @@ module InteractiveReplacer
     def initialize(opts = {})
       @results = []
       @directory = opts[:directory]
+      @search_text = opts[:search_text]
     end
 
-    def find_all(search_text)
-    end
-
-    def find_directory(search_text)
+    def find_directory
       match_dir_list = target_directory_paths.select do |path|
-        path.include?(search_text)
+        path.include?(@search_text)
       end
       current_results = match_dir_list.map do |path|
         {
@@ -23,9 +21,9 @@ module InteractiveReplacer
       @results.concat current_results
     end
 
-    def find_filename(search_text)
+    def find_filename
       match_file_list = target_file_paths.select do |path|
-        path.include?(search_text)
+        path.include?(@search_text)
       end
       current_results = match_file_list.map do |path|
         {
@@ -36,19 +34,19 @@ module InteractiveReplacer
       @results.concat current_results
     end
 
-    def find_in_file_recursive(search_text)
+    def find_in_file_recursive
       target_file_paths.each do |file_path|
-        find_in_file(file_path, search_text)
+        find_in_file(file_path)
       end
     end
 
-    def find_in_file(file_path, search_text)
+    def find_in_file(file_path)
       file_text = File.read(file_path)
       # 配列にしてeachだと遅そうな気がする。あとで確認してもいいかも。
       # file_lines = file_text.split("\n")
       # file_lines.each do |line|
       # end
-      match_data_list = match_global(file_text, search_text)
+      match_data_list = match_global(file_text, @search_text)
       current_results = match_data_list.map do |match_data|
         line_num = match_line_num(file_text, match_data)
         {

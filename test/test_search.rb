@@ -13,8 +13,8 @@ class TestSearch < Test::Unit::TestCase
     directory = 'test_find_directory'
     FileUtils.mkdir_p File.join(@tmp_dir, directory)
 
-    search = InteractiveReplacer::Search.new directory: @tmp_dir
-    search.find_directory('test_find_directory')
+    search = InteractiveReplacer::Search.new directory: @tmp_dir, search_text: 'test_find_directory'
+    search.find_directory
 
     result = search.results[0]
     assert_equal search.results.size, 1
@@ -26,8 +26,8 @@ class TestSearch < Test::Unit::TestCase
     filename = 'test_find_filename.txt'
     create_test_data(filename, '')
 
-    search = InteractiveReplacer::Search.new directory: @tmp_dir
-    search.find_filename('test_find_filename')
+    search = InteractiveReplacer::Search.new directory: @tmp_dir, search_text: 'test_find_filename'
+    search.find_filename
 
     result = search.results[0]
     assert_equal search.results.size, 1
@@ -40,8 +40,8 @@ class TestSearch < Test::Unit::TestCase
     text = 'test text'
     create_test_data(filename, text)
 
-    search = InteractiveReplacer::Search.new directory: @tmp_dir
-    search.find_in_file(filename, text)
+    search = InteractiveReplacer::Search.new directory: @tmp_dir, search_text: text
+    search.find_in_file(filename)
 
     result = search.results[0]
     assert_equal search.results.size, 1

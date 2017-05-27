@@ -13,14 +13,13 @@ module InteractiveReplacer
 
       search_text = args[0]
       replace_text = args[1]
-      # File.directory?(args[0])
       # puts('file or directory required.') && return unless opts[:file] or opts[:directory]
       # puts('invalid args.') && return unless args[0] or args[1]
       puts('invalid args.') && return unless search_text
 
-      search = InteractiveReplacer::Search.new directory: opts[:directory]
-      # search.find_in_file(opts[:file], search_text)
-      search.find_in_file_recursive(search_text)
+      search = InteractiveReplacer::Search.new directory: opts[:directory], search_text: search_text
+      # search.find_in_file(opts[:file])
+      search.find_in_file_recursive
 
       unless opts[:replace]
         search.show_results
