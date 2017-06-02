@@ -18,7 +18,28 @@ module InteractiveReplacer
 
     def replace_in_file_interactive(file_path, before, after='')
       file_text = File.read(file_path)
-      # puts gets, file_path, before, after
+      results = listen_replacement @results
+      # 文字列を特定位置で分割して配列にしたい
+      result_index = 0
+      replaced_text = file_text.partition(before).map do |text|
+        if text == before
+          result = results[result_index]
+          result_index += 1
+          if result.fetch(:should_replace, nil)
+            after
+          else
+            text
+          end
+        else
+          text
+        end
+      end.join('')
+      File.write(file_path, replaced_text)
+    end
+
+    private
+
+    def listen_replacement(results)
       interface = Interface.new(message: 'Replace', cases: [{
         cmd: 'y',
         func: proc { |result|
@@ -32,32 +53,14 @@ module InteractiveReplacer
           # TODO: quit
         }
       }])
-      @results.each do |result|
+      results.each do |result|
         interface.listen(
           path: result[:path],
           preview: result[:preview],
           proc_args: [result]
         )
       end
-      # 文字列を特定位置で分割して配列にしたい
-      # p file_text.split(before)
-      # p file_text.partition(before)
-      result_index = 0
-      replaced_text = file_text.partition(before).map do |text|
-        if text == before
-          result = @results[result_index]
-          result_index += 1
-          if result.fetch(:should_replace, nil)
-            after
-          else
-            text
-          end
-        else
-          text
-        end
-      end.join('')
-      # p replaced_text
-      File.write(file_path, replaced_text)
+      results
     end
   end
 end
