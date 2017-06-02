@@ -18,7 +18,7 @@ module InteractiveReplacer
 
     def replace_in_file_interactive(file_path, before, after='')
       file_text = File.read(file_path)
-      results = listen_replacement @results
+      results = listen_if_replace @results
       # 文字列を特定位置で分割して配列にしたい
       result_index = 0
       replaced_text = file_text.partition(before).map do |text|
@@ -39,7 +39,7 @@ module InteractiveReplacer
 
     private
 
-    def listen_replacement(results)
+    def listen_if_replace(results)
       interface = Interface.new(message: 'Replace', cases: [{
         cmd: 'y',
         func: proc { |result|
