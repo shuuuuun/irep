@@ -10,6 +10,7 @@ class TestSearch < Test::Unit::TestCase
   end
 
   def test_find_directory
+    # NOTE: ディレクトリ名にマッチする
     directory_1 = 'test_find_directory_1'
     directory_2 = 'test_find_directory_2'
     FileUtils.mkdir_p File.join(@tmp_dir, directory_1)
@@ -25,6 +26,7 @@ class TestSearch < Test::Unit::TestCase
   end
 
   def test_find_filename
+    # NOTE: ファイル名にマッチする
     filename_1 = 'test_find_filename_1.txt'
     filename_2 = 'test_find_filename_2.txt'
     create_test_data(filename_1, '')
@@ -40,6 +42,7 @@ class TestSearch < Test::Unit::TestCase
   end
 
   def test_find_in_file
+    # NOTE: ファイルの中身にマッチする
     filename = 'test_find_in_file.txt'
     file_path = File.join(@tmp_dir, filename)
     text = 'test text test'
@@ -59,6 +62,7 @@ class TestSearch < Test::Unit::TestCase
   end
 
   def test_find_in_file_recursive
+    # NOTE: ファイルの中身を再帰的に検索できる
     filename_1 = 'find_in_file_recursive_1.txt'
     filename_2 = 'find_in_file_recursive_2.txt'
     text = 'test text test'
