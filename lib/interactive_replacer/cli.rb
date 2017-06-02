@@ -19,6 +19,8 @@ module InteractiveReplacer
 
       search = InteractiveReplacer::Search.new directory: opts[:directory], search_text: search_text
       # search.find_in_file(opts[:file])
+      search.find_directory
+      search.find_filename
       search.find_in_file_recursive
 
       unless opts[:replace]
