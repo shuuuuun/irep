@@ -6,6 +6,7 @@ module InteractiveReplacer
       @results = []
       @directory = opts[:directory]
       @search_text = opts[:search_text]
+      @delimiter = "\n"
     end
 
     def find_directory
@@ -45,7 +46,7 @@ module InteractiveReplacer
     def find_in_file(file_path)
       file_text = File.read(file_path)
       # 配列にしてeachだと遅そうな気がする。あとで確認してもいいかも。
-      # file_lines = file_text.split("\n")
+      # file_lines = file_text.split(@delimiter)
       # file_lines.each do |line|
       # end
       match_data_list = match_global(file_text, @search_text)
@@ -90,17 +91,17 @@ module InteractiveReplacer
     end
 
     def extract_line(text, line_num, size)
-      text.split("\n")[line_num - 1]
+      text.split(@delimiter)[line_num - 1]
     end
 
     def match_line_num(text, match_data)
       offset = match_data.begin(0)
-      text.slice(0..offset).count("\n") + 1
+      text.slice(0..offset).count(@delimiter) + 1
     end
 
     def match_colmun_num(text, match_data)
       offset = match_data.begin(0)
-      text.slice(0..offset).split("\n").last.size - 1
+      text.slice(0..offset).split(@delimiter).last.size - 1
     end
 
     def match_global(str, regexp)
