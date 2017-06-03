@@ -50,7 +50,8 @@ module InteractiveReplacer
       }
 
       parser.on('--[no-]replace') { |v| options[:replace] = v }
-      parser.on('--only-search') { |v| options[:only_search] = true }
+      parser.on('--only-search') { |v| options[:replace] = false }
+      parser.on('--search') { |v| options[:replace] = false }
       parser.on('--interactive') { |v| options[:interactive] = v }
       parser.on('--directory VAL') { |v| options[:directory] = v }
       parser.on('--file VAL') { |v| options[:file] = v }
