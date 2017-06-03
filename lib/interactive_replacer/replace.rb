@@ -37,7 +37,7 @@ module InteractiveReplacer
         file_text = File.read(path)
         # 文字列を特定位置で分割して配列にできたらいいかも?
         result_index = 0
-        replaced_text = file_text.partition(search_text).map do |text|
+        replaced_text = file_text.split(/(#{search_text})/).map do |text|
           next text if text != search_text
           result = results[result_index]
           result_index += 1
