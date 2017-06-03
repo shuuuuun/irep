@@ -4,7 +4,7 @@ module InteractiveReplacer
 
     def initialize(opts = {})
       @results = []
-      @directory = opts[:directory]
+      @path = opts[:path]
       @search_text = opts[:search_text]
       @delimiter = "\n"
     end
@@ -77,13 +77,13 @@ module InteractiveReplacer
 
     def target_file_paths
       # TODO: ignore
-      paths = Dir.glob "#{@directory}/**/*"
+      paths = Dir.glob "#{@path}/**/*"
       paths.reject { |path| File.directory?(path) }
     end
 
     def target_directory_paths
       # TODO: ignore
-      paths = Dir.glob "#{@directory}/**/*"
+      paths = Dir.glob "#{@path}/**/*"
       paths.select { |path| File.directory?(path) }
     end
 

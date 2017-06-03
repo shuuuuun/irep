@@ -16,7 +16,7 @@ class TestSearch < Test::Unit::TestCase
     FileUtils.mkdir_p File.join(@tmp_dir, directory_1)
     FileUtils.mkdir_p File.join(@tmp_dir, directory_2)
 
-    search = InteractiveReplacer::Search.new directory: @tmp_dir, search_text: 'test_find_directory'
+    search = InteractiveReplacer::Search.new path: @tmp_dir, search_text: 'test_find_directory'
     search.find_directory
 
     result = search.results[0]
@@ -32,7 +32,7 @@ class TestSearch < Test::Unit::TestCase
     create_test_data(filename_1, '')
     create_test_data(filename_2, '')
 
-    search = InteractiveReplacer::Search.new directory: @tmp_dir, search_text: 'test_find_filename'
+    search = InteractiveReplacer::Search.new path: @tmp_dir, search_text: 'test_find_filename'
     search.find_filename
 
     result = search.results[0]
@@ -48,7 +48,7 @@ class TestSearch < Test::Unit::TestCase
     text = 'test text test'
     create_test_data(filename, text)
 
-    search = InteractiveReplacer::Search.new directory: @tmp_dir, search_text: 'test'
+    search = InteractiveReplacer::Search.new path: @tmp_dir, search_text: 'test'
     search.find_in_file(file_path)
 
     result = search.results[0]
@@ -69,7 +69,7 @@ class TestSearch < Test::Unit::TestCase
     create_test_data(filename_1, text)
     create_test_data(filename_2, text)
 
-    search = InteractiveReplacer::Search.new directory: @tmp_dir, search_text: 'test'
+    search = InteractiveReplacer::Search.new path: @tmp_dir, search_text: 'test'
     search.find_in_file_recursive
 
     result = search.results[0]

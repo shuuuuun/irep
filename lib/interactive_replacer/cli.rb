@@ -17,7 +17,7 @@ module InteractiveReplacer
       # puts('invalid args.') && return unless args[0] or args[1]
       puts('invalid args.') && return unless search_text
 
-      search = InteractiveReplacer::Search.new directory: opts[:directory], search_text: search_text
+      search = InteractiveReplacer::Search.new path: opts[:path], search_text: search_text
       # search.find_in_file(opts[:file])
       search.find_directory
       search.find_filename
@@ -45,7 +45,7 @@ module InteractiveReplacer
 
     def self.parse_options(argv = [])
       options = {
-        directory: '.', # TODO: pathのほうがいいかも
+        path: '.',
         replace: true
       }
 
@@ -54,6 +54,7 @@ module InteractiveReplacer
       parser.on('--search') { |v| options[:replace] = false }
       parser.on('--interactive') { |v| options[:interactive] = v }
       parser.on('--directory VAL') { |v| options[:directory] = v }
+      parser.on('--path VAL') { |v| options[:path] = v }
       parser.on('--file VAL') { |v| options[:file] = v }
       parser.on('--ignore-case') { |v| options[:ignore_case] = true }
       parser.on('--count') { |v| options[:count] = true }
