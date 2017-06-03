@@ -7,13 +7,52 @@ module InteractiveReplacer
       @delimiter = "\n"
     end
 
+    def replace_by_search_results(search_results, replace_text)
+      # TODO: replace_by_search_results
+    end
+
+    def replace_by_search_results_interactively(search_results, replace_text)
+      listened_results = listen_if_replace(search_results)
+      # binding.pry
+      replace_in_file_by_results listened_results.select { |r| r[:type] == 'in_file' }, replace_text
+    end
+
     def rename_path(path, before, after='')
       File.rename path, path.gsub(before, after)
+    end
+
+    def rename_path_interactively(path, before, after='')
+      # puts path, before, after
+      # File.rename path, path.gsub(before, after)
     end
 
     def replace_in_file(file_path, before, after='')
       txt = File.read(file_path).gsub(before, after)
       File.write(file_path, txt)
+    end
+
+    def replace_in_file_by_results(search_results, replace_text)
+      grouped_results = search_results.group_by { |r| r[:path] }
+      grouped_results.each do |path, results|
+        file_text = File.read(path)
+        # 文字列を特定位置で分割して配列にできたらいいかも?
+        search_text = results[0][:search_text]
+        result_index = 0
+        replaced_text = file_text.partition(search_text).map do |text|
+          if text == search_text
+            result = results[result_index]
+            result_index += 1
+            if result.fetch(:should_replace, nil)
+              replace_text
+            else
+              text
+            end
+          else
+            text
+          end
+        end.join('')
+        File.write(path, replaced_text)
+      end
     end
 
     def replace_in_file_interactive(file_path, before, after='')
