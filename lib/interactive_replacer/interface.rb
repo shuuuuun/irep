@@ -10,7 +10,8 @@ module InteractiveReplacer
       while flag
         puts "\n"
         puts "path: #{opts[:path]}"
-        puts opts[:preview]
+        puts "- #{opts[:preview]}" if opts[:preview]
+        puts "+ #{opts[:result_preview]}" if opts[:result_preview]
         # print 'Replace [y,n,q,a,d,/,j,J,g,e,?]? '
         print "#{@message} [#{@cases.map {|c| c[:cmd]}.join(',')}]? "
         cmd = self.class.get_input

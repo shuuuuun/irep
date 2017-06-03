@@ -12,6 +12,10 @@ module InteractiveReplacer
     end
 
     def replace_by_search_results_interactively(search_results, replace_text)
+      search_results.each do |result|
+        next unless result[:preview]
+        result[:result_preview] = result[:preview].gsub(result[:search_text], replace_text)
+      end
       listened_results = listen_if_replace(search_results)
       # binding.pry
       replace_in_file_by_results listened_results.select { |r| r[:type] == 'in_file' }, replace_text
@@ -96,6 +100,7 @@ module InteractiveReplacer
         interface.listen(
           path: result[:path],
           preview: result[:preview],
+          result_preview: result[:result_preview],
           proc_args: [result]
         )
       end
