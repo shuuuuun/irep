@@ -56,13 +56,16 @@ module InteractiveReplacer
     def listen_if_replace(results)
       interface = Interface.new(message: 'Replace', cases: [{
         cmd: 'y',
+        help: 'yes, Replace it.',
         func: proc { |result|
           result[:should_replace] = true
         }
       }, {
-        cmd: 'n'
+        cmd: 'n',
+        help: 'no, Don\'t replace it.',
       }, {
         cmd: 'q',
+        help: 'quit',
         func: proc {
           # TODO: quit
         }

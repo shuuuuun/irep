@@ -21,6 +21,9 @@ module InteractiveReplacer
         if match_case
           match_case[:func].call(*opts[:proc_args]) if match_case[:func]
           flag = false
+        else
+          msg = @cases.map { |c| "#{c[:cmd]} - #{c[:help]}" }.join("\n")
+          puts Rainbow("#{msg}").bold.maroon
         end
       end
     end
