@@ -5,11 +5,13 @@ module InteractiveReplacer
     def initialize(cases: [], message:)
       @cases = cases
       @message = message
+      @quit = false
     end
 
     def listen(opts = {})
-      flag = true
-      while flag
+      return if @quit
+      listening = true
+      while listening
         puts "\n"
         puts "path: #{opts[:path]}"
         puts Rainbow("- #{opts[:preview]}").red if opts[:preview]
@@ -20,12 +22,16 @@ module InteractiveReplacer
         match_case = @cases.select {|c| c[:cmd] == cmd.downcase }.first
         if match_case
           match_case[:func].call(*opts[:proc_args]) if match_case[:func]
-          flag = false
+          listening = false
         else
           msg = @cases.map { |c| "#{c[:cmd]} - #{c[:help]}" }.join("\n")
           puts Rainbow("#{msg}").bold.maroon
         end
       end
+    end
+
+    def quit
+      @quit = true
     end
 
     def self.get_input

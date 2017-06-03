@@ -67,7 +67,7 @@ module InteractiveReplacer
         cmd: 'q',
         help: 'quit',
         func: proc {
-          # TODO: quit
+          interface.quit
         }
       }])
       results.each do |result|
