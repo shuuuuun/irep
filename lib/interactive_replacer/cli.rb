@@ -27,10 +27,11 @@ module InteractiveReplacer
         search.show_results
         return
       end
-      replace = InteractiveReplacer::Replace.new search
+      # replace = InteractiveReplacer::Replace.new search
       # replace.replace_in_file_interactive(opts[:file], search_text, replace_text)
       # replace.replace_in_file_recursive_interactive(opts[:directory], search_text, replace_text)
-      replace.replace_by_search_results_interactively search.results, replace_text
+      # replace.replace_by_search_results_interactively search.results, replace_text
+      InteractiveReplacer::Replace.replace_by_search_results_interactively search.results, replace_text
       # return
       # search.results.each do |result|
       #   case result[:type].to_sym

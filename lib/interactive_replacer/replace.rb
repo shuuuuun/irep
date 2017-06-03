@@ -1,11 +1,9 @@
+require 'pry'
 require 'interactive_replacer/interface'
 
 module InteractiveReplacer
-  class Replace
-    def initialize(search=nil)
-      @results = search ? search.results : []
-      @delimiter = "\n"
-    end
+  module Replace
+    extend self
 
     def replace_by_search_results(search_results, replace_text)
       # TODO: replace_by_search_results
