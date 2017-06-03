@@ -17,6 +17,7 @@ module InteractiveReplacer
         {
           type: 'directory',
           path: path,
+          preview: path,
         }
       end
       @results.concat current_results
@@ -30,6 +31,7 @@ module InteractiveReplacer
         {
           type: 'filename',
           path: path,
+          preview: path,
         }
       end
       @results.concat current_results
@@ -61,9 +63,6 @@ module InteractiveReplacer
         }
       end
       @results.concat current_results
-      # @results.concat(current_results).uniq!
-      # show_results
-      # @results
     end
 
     def show_results
