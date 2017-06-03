@@ -30,18 +30,16 @@ module InteractiveReplacer
       replace = InteractiveReplacer::Replace.new search
       # replace.replace_in_file_interactive(opts[:file], search_text, replace_text)
       # replace.replace_in_file_recursive_interactive(opts[:directory], search_text, replace_text)
-      # binding.pry
-      p search.results
       replace.replace_by_search_results_interactively search.results, replace_text
-      return
-      search.results.each do |result|
-        case result[:type].to_sym
-        when :in_file
-          replace.replace_in_file_interactive(result[:path], search_text, replace_text)
-        when :filename, :directory
-          replace.rename_path_interactive(result[:path], search_text, replace_text)
-        end
-      end
+      # return
+      # search.results.each do |result|
+      #   case result[:type].to_sym
+      #   when :in_file
+      #     replace.replace_in_file_interactive(result[:path], search_text, replace_text)
+      #   when :filename, :directory
+      #     replace.rename_path_interactive(result[:path], search_text, replace_text)
+      #   end
+      # end
     end
 
     def self.parse_options(argv = [])

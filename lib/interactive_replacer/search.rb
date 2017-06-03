@@ -16,6 +16,7 @@ module InteractiveReplacer
         {
           type: 'directory',
           path: path,
+          search_text: @search_text,
         }
       end
       @results.concat current_results
@@ -29,6 +30,7 @@ module InteractiveReplacer
         {
           type: 'filename',
           path: path,
+          search_text: @search_text,
         }
       end
       @results.concat current_results
