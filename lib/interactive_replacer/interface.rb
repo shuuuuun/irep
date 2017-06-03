@@ -1,3 +1,5 @@
+require 'rainbow'
+
 module InteractiveReplacer
   class Interface
     def initialize(cases: [], message:)
@@ -10,10 +12,10 @@ module InteractiveReplacer
       while flag
         puts "\n"
         puts "path: #{opts[:path]}"
-        puts "- #{opts[:preview]}" if opts[:preview]
-        puts "+ #{opts[:result_preview]}" if opts[:result_preview]
+        puts Rainbow("- #{opts[:preview]}").red if opts[:preview]
+        puts Rainbow("+ #{opts[:result_preview]}").green if opts[:result_preview]
         # print 'Replace [y,n,q,a,d,/,j,J,g,e,?]? '
-        print "#{@message} [#{@cases.map {|c| c[:cmd]}.join(',')}]? "
+        print Rainbow("#{@message} [#{@cases.map {|c| c[:cmd]}.join(',')}]? ").bold.lightskyblue
         cmd = self.class.get_input
         match_case = @cases.select {|c| c[:cmd] == cmd.downcase }.first
         if match_case
