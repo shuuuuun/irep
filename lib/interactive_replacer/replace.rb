@@ -5,20 +5,20 @@ module InteractiveReplacer
   module Replace
     extend self
 
-    def replace_by_search_results(search_results, replace_text)
+    def replace_by_search_results(search_results, search_text, replace_text)
       # TODO: replace_by_search_results
     end
 
-    def replace_by_search_results_interactively(search_results, replace_text)
+    def replace_by_search_results_interactively(search_results, search_text, replace_text)
       search_results.each do |result|
         next unless result[:preview]
-        result[:result_preview] = result[:preview].gsub(result[:search_text], replace_text)
+        result[:result_preview] = result[:preview].gsub(search_text, replace_text)
       end
       listened_results = listen_if_replace(search_results)
-      replace_in_file_by_results listened_results.select { |r| r[:type] == 'in_file' }, replace_text
+      replace_in_file_by_results listened_results.select { |r| r[:type] == 'in_file' }, search_text, replace_text
       listened_results.select { |r| r[:type] == 'filename' || r[:type] == 'directory' }.each do |result|
         next unless result[:should_replace]
-        rename_path result[:path], result[:search_text], replace_text
+        rename_path result[:path], search_text, replace_text
       end
     end
 
@@ -31,12 +31,11 @@ module InteractiveReplacer
       File.write(file_path, txt)
     end
 
-    def replace_in_file_by_results(search_results, replace_text)
+    def replace_in_file_by_results(search_results, search_text, replace_text)
       grouped_results = search_results.group_by { |r| r[:path] }
       grouped_results.each do |path, results|
         file_text = File.read(path)
         # 文字列を特定位置で分割して配列にできたらいいかも?
-        search_text = results[0][:search_text]
         result_index = 0
         replaced_text = file_text.partition(search_text).map do |text|
           if text == search_text

@@ -17,7 +17,6 @@ module InteractiveReplacer
         {
           type: 'directory',
           path: path,
-          search_text: @search_text,
         }
       end
       @results.concat current_results
@@ -31,7 +30,6 @@ module InteractiveReplacer
         {
           type: 'filename',
           path: path,
-          search_text: @search_text,
         }
       end
       @results.concat current_results
@@ -60,7 +58,6 @@ module InteractiveReplacer
           line: line_num, # y, row 行数
           colmun: match_colmun_num(file_text, match_data), # x, colmun その行の何文字目か
           preview: extract_line(file_text, line_num, 1), # プレビュー表示するテキスト（マッチした行+数行）
-          search_text: @search_text,
         }
       end
       @results.concat current_results
