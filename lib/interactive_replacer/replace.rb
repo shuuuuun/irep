@@ -65,10 +65,28 @@ module InteractiveReplacer
         help: 'no, Don\'t replace it.',
       }, {
         cmd: 'q',
-        help: 'quit',
+        help: 'quit, Don\'t apply any replacement after this.',
         func: proc {
           interface.quit
         }
+      }, {
+        cmd: 'a',
+        help: 'all, Apply all replacement after this.',
+        func: proc {
+          # TODO
+        }
+      # }, {
+      #   cmd: 'h',
+      #   help: 'help, Show this help.',
+      #   func: proc {
+      #     # TODO: help
+      #   }
+      # }, {
+      #   cmd: '?',
+      #   help: 'help, Show this help.',
+      #   func: proc {
+      #     # TODO: help
+      #   }
       }])
       results.each do |result|
         interface.listen(
