@@ -1,6 +1,7 @@
 require 'optparse'
 require 'interactive_replacer/search'
 require 'interactive_replacer/replace'
+require 'interactive_replacer/interface'
 
 module InteractiveReplacer
   class CLI
@@ -8,12 +9,12 @@ module InteractiveReplacer
       # puts "argv: #{argv}"
       opts, args = parse_options argv
       # stdout.print parser.help
-      puts "opts: #{opts}"
-      puts "args: #{args}"
+      Interface.info "opts: #{opts}"
+      Interface.info "args: #{args}"
 
       search_text = args[0]
       replace_text = args[1]
-      puts('invalid args.') && return unless search_text
+      Interface.error('invalid args.') && return unless search_text
 
       search = Search.new path: opts[:path], search_text: search_text
       search.find_directory

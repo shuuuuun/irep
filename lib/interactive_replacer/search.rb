@@ -70,7 +70,7 @@ module InteractiveReplacer
     end
 
     def show_results
-      puts('no search results.') && return if @results.empty?
+      Interface.error('no search results.') && return if @results.empty?
       @results.each do |result|
         Interface.show_search_results path: result[:path], line: result[:line], preview: result[:preview]
       end

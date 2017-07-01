@@ -43,5 +43,17 @@ module InteractiveReplacer
       puts Rainbow("#{path}").lightgreen
       puts "#{Rainbow(line).darkgoldenrod}: #{preview}"
     end
+
+    def self.error(text)
+      puts Rainbow(text).red
+    end
+
+    def self.info(text)
+      puts Rainbow(text).navajowhite
+    end
+
+    def self.debug(text)
+      puts Rainbow(text).saddlebrown
+    end
   end
 end
