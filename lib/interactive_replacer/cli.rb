@@ -14,7 +14,9 @@ module InteractiveReplacer
 
       search_text = args[0]
       replace_text = args[1]
-      Interface.error('invalid args.') && return unless search_text
+      unless search_text
+        usage 'invalid args.'
+      end
 
       search = Search.new path: opts[:path], search_text: search_text
       search.find_directory
@@ -23,7 +25,7 @@ module InteractiveReplacer
 
       unless opts[:replace]
         search.show_results
-        return
+        exit
       end
       Replace.replace_by_search_results_interactively search.results, search_text, replace_text
     end
@@ -63,8 +65,8 @@ module InteractiveReplacer
     end
 
     def self.usage(msg = nil)
+      Interface.error "Error: #{msg}" if msg
       puts parser.help
-      puts "error: #{msg}" if msg
       exit 1
     end
 
