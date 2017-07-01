@@ -1,4 +1,3 @@
-require 'pry'
 require 'interactive_replacer/interface'
 
 module InteractiveReplacer
