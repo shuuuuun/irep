@@ -37,5 +37,11 @@ module InteractiveReplacer
     def self.get_input
       STDIN.gets.chomp
     end
+
+    def self.show_search_results(path:, line:, preview:)
+      puts "\n"
+      puts Rainbow("#{path}").lightgreen
+      puts "#{Rainbow(line).darkgoldenrod}: #{preview}"
+    end
   end
 end

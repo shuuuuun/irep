@@ -1,3 +1,5 @@
+require 'interactive_replacer/interface'
+
 module InteractiveReplacer
   class Search
     attr_reader :results
@@ -70,7 +72,7 @@ module InteractiveReplacer
     def show_results
       puts('no search results.') && return if @results.empty?
       @results.each do |result|
-        p result
+        Interface.show_search_results path: result[:path], line: result[:line], preview: result[:preview]
       end
     end
 
