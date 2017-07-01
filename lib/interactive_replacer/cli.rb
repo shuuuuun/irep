@@ -17,7 +17,7 @@ module InteractiveReplacer
       # puts('invalid args.') && return unless args[0] or args[1]
       puts('invalid args.') && return unless search_text
 
-      search = InteractiveReplacer::Search.new path: opts[:path], search_text: search_text
+      search = Search.new path: opts[:path], search_text: search_text
       # search.find_in_file(opts[:file])
       search.find_directory
       search.find_filename
@@ -27,11 +27,11 @@ module InteractiveReplacer
         search.show_results
         return
       end
-      # replace = InteractiveReplacer::Replace.new search
+      # replace = Replace.new search
       # replace.replace_in_file_interactive(opts[:file], search_text, replace_text)
       # replace.replace_in_file_recursive_interactive(opts[:directory], search_text, replace_text)
       # replace.replace_by_search_results_interactively search.results, replace_text
-      InteractiveReplacer::Replace.replace_by_search_results_interactively search.results, search_text, replace_text
+      Replace.replace_by_search_results_interactively search.results, search_text, replace_text
       # return
       # search.results.each do |result|
       #   case result[:type].to_sym
