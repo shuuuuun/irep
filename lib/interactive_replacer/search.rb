@@ -63,6 +63,8 @@ module InteractiveReplacer
         }
       end
       @results.concat current_results
+    rescue ArgumentError => e
+      puts "Error: #{e}. In #{file_path}."
     end
 
     def show_results
