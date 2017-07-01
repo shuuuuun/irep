@@ -45,6 +45,8 @@ module InteractiveReplacer
 
     def find_in_file(file_path)
       file_text = File.read(file_path)
+      file_text.force_encoding('UTF-8')
+      file_text.scrub!('?')
       # 配列にしてeachだと遅そうな気がする。あとで確認してもいいかも。
       # file_lines = file_text.split(@delimiter)
       # file_lines.each do |line|
@@ -63,8 +65,6 @@ module InteractiveReplacer
         }
       end
       @results.concat current_results
-    rescue ArgumentError => e
-      puts "Error: #{e}. In #{file_path}."
     end
 
     def show_results
