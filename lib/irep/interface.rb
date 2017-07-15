@@ -1,6 +1,6 @@
 require 'rainbow'
 
-module InteractiveReplacer
+module Irep
   class Interface
     def initialize(cases: [], message:)
       @cases = cases

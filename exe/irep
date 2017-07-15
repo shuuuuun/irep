@@ -2,4 +2,4 @@
 
 require 'irep'
 
-InteractiveReplacer::CLI.execute(STDOUT, ARGV)
+Irep::CLI.execute(STDOUT, ARGV)

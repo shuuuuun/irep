@@ -5,7 +5,7 @@ require 'irep/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "irep"
-  spec.version       = InteractiveReplacer::VERSION
+  spec.version       = Irep::VERSION
   spec.authors       = ["motoki-shun"]
   spec.email         = ["shuuuuuny@gmail.com"]
 

@@ -3,7 +3,7 @@ require 'irep/search'
 require 'irep/replace'
 require 'irep/interface'
 
-module InteractiveReplacer
+module Irep
   class CLI
     def self.execute(stdout, argv = [])
       # puts "argv: #{argv}"

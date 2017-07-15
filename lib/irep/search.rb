@@ -1,6 +1,6 @@
 require 'irep/interface'
 
-module InteractiveReplacer
+module Irep
   class Search
     attr_reader :results
 
