@@ -1,0 +1,20 @@
+
+
+# ==== Emoji ====
+# ✨ :sparkles: when adding feature, 機能を追加
+# 🗑  :wastebasket: when removing feature, 機能を削除
+# 🐛 :bug: when fixing a bug, バグ修正
+# 🚀 :rocket: when improving performance, パフォーマンス改善
+# ♻️  :recycle: refactoring, リファクタリング
+# ✅ :white_check_mark: when adding tests, テスト追加
+# 🔈 :speaker: when adding logging, ログを追加
+# 🔇 :mute: when reducing logging, ログを削除
+# 🔒 :lock: when dealing with security, セキュリティ関係
+# ⬆️  :arrow_up: when upgrading dependencies, 依存関係をアップグレード
+# ⬇️  :arrow_down: when downgrading dependencies, 依存関係をダウングレード
+# 📝 :memo: when writing docs or notes, ドキュメントやメモの追加
+# 🎉 :tada: release, リリース
+# 🚧 :construction: work in progress*, 作業中*
+#
+# *deprecation
+
