@@ -1,9 +1,9 @@
 require 'optparse'
-require 'interactive_replacer/search'
-require 'interactive_replacer/replace'
-require 'interactive_replacer/interface'
+require 'irep/search'
+require 'irep/replace'
+require 'irep/interface'
 
-module InteractiveReplacer
+module Irep
   class CLI
     def self.execute(stdout, argv = [])
       # puts "argv: #{argv}"

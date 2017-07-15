@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'interactive_replacer'
-
-InteractiveReplacer::CLI.execute(STDOUT, ARGV)

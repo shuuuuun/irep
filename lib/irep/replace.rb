@@ -1,6 +1,6 @@
-require 'interactive_replacer/interface'
+require 'irep/interface'
 
-module InteractiveReplacer
+module Irep
   module Replace
     extend self
 

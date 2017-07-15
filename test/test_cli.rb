@@ -1,8 +1,8 @@
 require 'fileutils'
 require 'test/unit/rr'
 require 'test_helper'
-require 'interactive_replacer/cli'
-require 'interactive_replacer/interface'
+require 'irep/cli'
+require 'irep/interface'
 
 class TestCLI < Test::Unit::TestCase
   def setup
@@ -18,7 +18,7 @@ class TestCLI < Test::Unit::TestCase
   end
 
   def test_simple_y
-    stub(InteractiveReplacer::Interface).get_input { 'y' }
+    stub(Irep::Interface).get_input { 'y' }
     create_test_data('simple_y.txt', 'aaa')
     execute('aaa bbb')
     assert_equal read_test_data('simple_y.txt'), 'bbb'
@@ -28,7 +28,7 @@ class TestCLI < Test::Unit::TestCase
   end
 
   def test_simple_n
-    stub(InteractiveReplacer::Interface).get_input { 'n' }
+    stub(Irep::Interface).get_input { 'n' }
     create_test_data('simple_n.txt', 'aaa')
     execute('aaa bbb')
     assert_equal read_test_data('simple_n.txt'), 'aaa'
@@ -54,7 +54,7 @@ class TestCLI < Test::Unit::TestCase
 
   def execute(arg)
     io = StringIO.new
-    InteractiveReplacer::CLI.execute(io, arg.split)
+    Irep::CLI.execute(io, arg.split)
     io.string
   end
 end
