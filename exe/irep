@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'interactive_replacer'
+require 'irep'
 
 InteractiveReplacer::CLI.execute(STDOUT, ARGV)

@@ -1,4 +1,4 @@
-require 'interactive_replacer/interface'
+require 'irep/interface'
 
 module InteractiveReplacer
   class Search

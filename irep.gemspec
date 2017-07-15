@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'interactive_replacer/version'
+require 'irep/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "interactive_replacer"
+  spec.name          = "irep"
   spec.version       = InteractiveReplacer::VERSION
   spec.authors       = ["motoki-shun"]
   spec.email         = ["shuuuuuny@gmail.com"]

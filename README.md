@@ -6,7 +6,7 @@
 
 Install it yourself as:
 
-    $ gem install interactive_replacer
+    $ gem install irep
 
 ## Usage
 
@@ -20,4 +20,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/shuuuuun/interactive_replacer.
+Bug reports and pull requests are welcome on GitHub at https://github.com/shuuuuun/irep.

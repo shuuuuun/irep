@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'interactive_replacer/replace'
+require 'irep/replace'
 
 class TestReplace < Test::Unit::TestCase
   def setup

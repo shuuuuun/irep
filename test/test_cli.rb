@@ -1,8 +1,8 @@
 require 'fileutils'
 require 'test/unit/rr'
 require 'test_helper'
-require 'interactive_replacer/cli'
-require 'interactive_replacer/interface'
+require 'irep/cli'
+require 'irep/interface'
 
 class TestCLI < Test::Unit::TestCase
   def setup

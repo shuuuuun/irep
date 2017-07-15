@@ -1,5 +1,5 @@
 require 'test_helper'
-require 'interactive_replacer/search'
+require 'irep/search'
 
 class TestSearch < Test::Unit::TestCase
   def setup
