@@ -1,4 +1,5 @@
 require 'optparse'
+require 'irep/version'
 require 'irep/search'
 require 'irep/replace'
 require 'irep/interface'
@@ -37,6 +38,8 @@ module Irep
         path: '.',
         replace: true
       }
+
+      parser.version = Irep::VERSION
 
       parser.on('--[no-]replace') { |v| options[:replace] = v }
       parser.on('--path VAL') { |v| options[:path] = v }
