@@ -1,12 +1,8 @@
 #!/usr/bin/env ruby
 
-require "bundler/setup"
-require "irep"
-
-# You can add fixtures and/or initialization code here to make experimenting
-# with your gem easier. You can also use a different console, if you like.
-
-require "pry"
+require 'bundler/setup'
+require 'pry'
+require 'irep'
 
 def irep(argv='')
   Irep::CLI.execute(STDOUT, argv)
