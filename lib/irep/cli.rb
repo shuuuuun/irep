@@ -58,6 +58,14 @@ module Irep
       # parser.on('--show-hidden-files') { |v| options[:show_hidden_files] = true }
       # parser.on('--dry-run') { |v| options[:dry_run] = true }
       # parser.on('--verbose') { |v| options[:verbose] = true }
+      parser.on_tail('--version', 'Show version') do
+        puts parser.version
+        exit
+      end
+      parser.on_tail('-h', '--help', 'Show this message') do
+        puts parser
+        exit
+      end
 
       begin
         # parser.parse!(argv)
