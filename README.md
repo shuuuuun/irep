@@ -1,22 +1,27 @@
 # Irep
 
-*This project is under development...*
+<!-- 
+TODO: Write Features.
+## Features
+ -->
 
 ## Installation
-
-Install it yourself as:
 
     $ gem install irep
 
 ## Usage
 
-TODO: Write usage instructions here
+    # Search and interactive replace text from current directory recursively.
+    $ irep before after
 
-## Development
+    # Search and replace text with some options.
+    $ irep OPTIONs before after
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+    # Display help.
+    $ irep --help
+    Usage: irep [options]
+            --[no-]replace
+            --path VAL
 
 ## Contributing
 
