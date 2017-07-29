@@ -8,7 +8,7 @@ class TestCLI < Test::Unit::TestCase
   def setup
     # @before_dir = Dir.pwd
     @tmp_dir = File.join(File.dirname(__FILE__), '../', 'tmp', 'test')
-    FileUtils.remove_dir @tmp_dir
+    FileUtils.remove_dir @tmp_dir if File.exist? @tmp_dir
     FileUtils.mkdir_p @tmp_dir
     Dir.chdir @tmp_dir
   end
