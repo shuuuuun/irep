@@ -30,6 +30,8 @@ module Irep
       Replace.replace_by_search_results_interactively search.results, search_text, replace_text
     end
 
+    private
+
     def self.parse_options(argv = [])
       options = {
         path: '.',
