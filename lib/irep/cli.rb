@@ -15,7 +15,7 @@ module Irep
       search_text = args[0]
       replace_text = args[1]
       unless search_text
-        usage 'invalid args.'
+        display_error 'invalid args.'
       end
 
       search = Search.new path: opts[:path], search_text: search_text
@@ -58,13 +58,13 @@ module Irep
         # parser.parse!(argv)
         arguments = parser.parse(argv)
       rescue OptionParser::InvalidOption => e
-        usage e.message
+        display_error e.message
       end
 
       [options, arguments]
     end
 
-    def self.usage(msg = nil)
+    def self.display_error(msg = nil)
       Interface.error "Error: #{msg}" if msg
       puts parser.help
       exit 1
