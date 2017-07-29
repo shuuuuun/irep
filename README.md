@@ -26,3 +26,9 @@ TODO: Write Features.
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/shuuuuun/irep.
+
+## License
+
+Copyright (c) 2017 shuuuuun  
+Released under the MIT license  
+http://opensource.org/licenses/mit-license.php
