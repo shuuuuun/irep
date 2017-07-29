@@ -1,5 +1,7 @@
 # Irep
 
+A code searching and interactive replacing tool on CLI.
+
 <!-- 
 TODO: Write Features.
 ## Features
