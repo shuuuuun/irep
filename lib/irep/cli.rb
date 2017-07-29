@@ -8,9 +8,10 @@ module Irep
   class CLI
     def self.execute(stdout, argv = [])
       opts, args = parse_options argv
-      Interface.debug "argv: #{argv}"
-      Interface.debug "opts: #{opts}"
-      Interface.debug "args: #{args}"
+      # TODO: implement log level
+      # Interface.debug "argv: #{argv}"
+      # Interface.debug "opts: #{opts}"
+      # Interface.debug "args: #{args}"
 
       search_text = args[0]
       replace_text = args[1]
@@ -57,6 +58,7 @@ module Irep
       # parser.on('--show-hidden-files') { |v| options[:show_hidden_files] = true }
       # parser.on('--dry-run') { |v| options[:dry_run] = true }
       # parser.on('--verbose') { |v| options[:verbose] = true }
+      # parser.on('--debug') { |v| options[:debug] = true }
       parser.on_tail('--version', 'Show version') do
         puts parser.version
         exit
