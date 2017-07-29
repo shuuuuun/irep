@@ -1,4 +1,5 @@
 require 'optparse'
+require 'irep/version'
 require 'irep/search'
 require 'irep/replace'
 require 'irep/interface'
@@ -6,16 +7,16 @@ require 'irep/interface'
 module Irep
   class CLI
     def self.execute(stdout, argv = [])
-      # puts "argv: #{argv}"
       opts, args = parse_options argv
-      # stdout.print parser.help
-      Interface.info "opts: #{opts}"
-      Interface.info "args: #{args}"
+      # TODO: implement log level
+      # Interface.debug "argv: #{argv}"
+      # Interface.debug "opts: #{opts}"
+      # Interface.debug "args: #{args}"
 
       search_text = args[0]
       replace_text = args[1]
-      unless search_text
-        usage 'invalid args.'
+      unless search_text && !search_text.empty?
+        display_error 'invalid args.'
       end
 
       search = Search.new path: opts[:path], search_text: search_text
@@ -30,11 +31,15 @@ module Irep
       Replace.replace_by_search_results_interactively search.results, search_text, replace_text
     end
 
+    private
+
     def self.parse_options(argv = [])
       options = {
         path: '.',
         replace: true
       }
+
+      parser.version = Irep::VERSION
 
       parser.on('--[no-]replace') { |v| options[:replace] = v }
       parser.on('--path VAL') { |v| options[:path] = v }
@@ -53,18 +58,27 @@ module Irep
       # parser.on('--show-hidden-files') { |v| options[:show_hidden_files] = true }
       # parser.on('--dry-run') { |v| options[:dry_run] = true }
       # parser.on('--verbose') { |v| options[:verbose] = true }
+      # parser.on('--debug') { |v| options[:debug] = true }
+      parser.on_tail('--version', 'Show version') do
+        puts parser.version
+        exit
+      end
+      parser.on_tail('-h', '--help', 'Show this message') do
+        puts parser
+        exit
+      end
 
       begin
         # parser.parse!(argv)
         arguments = parser.parse(argv)
       rescue OptionParser::InvalidOption => e
-        usage e.message
+        display_error e.message
       end
 
       [options, arguments]
     end
 
-    def self.usage(msg = nil)
+    def self.display_error(msg = nil)
       Interface.error "Error: #{msg}" if msg
       puts parser.help
       exit 1
