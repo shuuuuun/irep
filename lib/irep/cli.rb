@@ -14,7 +14,7 @@ module Irep
 
       search_text = args[0]
       replace_text = args[1]
-      unless search_text
+      unless search_text && !search_text.empty?
         display_error 'invalid args.'
       end
 
