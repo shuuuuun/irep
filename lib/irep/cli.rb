@@ -7,11 +7,10 @@ require 'irep/interface'
 module Irep
   class CLI
     def self.execute(stdout, argv = [])
-      # puts "argv: #{argv}"
       opts, args = parse_options argv
-      # stdout.print parser.help
-      Interface.info "opts: #{opts}"
-      Interface.info "args: #{args}"
+      Interface.debug "argv: #{argv}"
+      Interface.debug "opts: #{opts}"
+      Interface.debug "args: #{args}"
 
       search_text = args[0]
       replace_text = args[1]
