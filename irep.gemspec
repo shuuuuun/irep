@@ -9,8 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["motoki-shun"]
   spec.email         = ["shuuuuuny@gmail.com"]
 
-  spec.summary       = "" # %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = "" # %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = 'A code searching and interactive replacing tool on CLI.'
   spec.homepage      = 'https://github.com/shuuuuun/irep'
   spec.license       = 'MIT'
 
