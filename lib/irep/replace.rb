@@ -21,10 +21,6 @@ module Irep
       end
     end
 
-    def rename_path(path, before, after)
-      File.rename path, path.gsub(before, after)
-    end
-
     # TODO: replace_in_file 消してもいいかも
     # def replace_in_file(file_path, before, after='')
     #   txt = File.read(file_path).gsub(before, after)
@@ -52,6 +48,10 @@ module Irep
     end
 
     private
+
+    def rename_path(path, before, after)
+      File.rename path, path.gsub(before, after)
+    end
 
     def listen_if_replace(results)
       interface = Interface.new(message: 'Replace', cases: [{
