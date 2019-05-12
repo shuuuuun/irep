@@ -73,7 +73,7 @@ module Irep
         cmd: 'a',
         help: 'all, Apply all replacement after this.',
         func: proc {
-          # TODO
+          interface.apply_all
         }
       # }, {
       #   cmd: 'h',
@@ -95,6 +95,7 @@ module Irep
           result_preview: result[:result_preview],
           proc_args: [result]
         )
+        result[:should_replace] = true if interface.apply_all_flag
       end
       results
     end
