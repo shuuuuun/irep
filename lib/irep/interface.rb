@@ -2,10 +2,13 @@ require 'rainbow'
 
 module Irep
   class Interface
+    attr_reader :apply_all_flag
+
     def initialize(cases: [], message:)
       @cases = cases
       @message = message
       @quit = false
+      @apply_all_flag = false
     end
 
     def listen(opts = {})
@@ -31,6 +34,11 @@ module Irep
     end
 
     def quit
+      @quit = true
+    end
+
+    def apply_all
+      @apply_all_flag = true
       @quit = true
     end
 
