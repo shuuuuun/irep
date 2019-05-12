@@ -1,3 +1,4 @@
+require 'ripgrep'
 require 'irep/interface'
 
 module Irep
