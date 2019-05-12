@@ -4,17 +4,17 @@ module Irep
   module Replace
     extend self
 
-    def replace_by_search_results(search_results, search_text, replace_text)
-      # TODO: replace_by_search_results
-    end
+    # def replace_immediately(search_results, search_text, replace_text)
+    #   # TODO: replace_immediately
+    # end
 
-    def replace_by_search_results_interactively(search_results, search_text, replace_text)
+    def replace_interactively(search_results, search_text, replace_text)
       search_results.each do |result|
         next unless result[:preview]
         result[:result_preview] = result[:preview].gsub(search_text, replace_text)
       end
       listened_results = listen_if_replace(search_results)
-      replace_in_file_by_results listened_results.select { |r| r[:type] == Search::MatchType::IN_FILE }, search_text, replace_text
+      replace_in_file listened_results.select { |r| r[:type] == Search::MatchType::IN_FILE }, search_text, replace_text
       listened_results.select { |r| r[:type] == Search::MatchType::FILENAME || r[:type] == Search::MatchType::DIRECTORY }.each do |result|
         next unless result[:should_replace]
         rename_path result[:path], search_text, replace_text
@@ -25,12 +25,12 @@ module Irep
       File.rename path, path.gsub(before, after)
     end
 
-    def replace_in_file(file_path, before, after='')
-      txt = File.read(file_path).gsub(before, after)
-      File.write(file_path, txt)
-    end
+    # def replace_in_file(file_path, before, after='')
+    #   txt = File.read(file_path).gsub(before, after)
+    #   File.write(file_path, txt)
+    # end
 
-    def replace_in_file_by_results(search_results, search_text, replace_text)
+    def replace_in_file(search_results, search_text, replace_text)
       grouped_results = search_results.group_by { |r| r[:path] }
       grouped_results.each do |path, results|
         file_text = File.read(path)

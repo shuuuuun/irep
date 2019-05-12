@@ -28,7 +28,7 @@ module Irep
         search.show_results
         exit
       end
-      Replace.replace_by_search_results_interactively search.results, search_text, replace_text
+      Replace.replace_interactively search.results, search_text, replace_text
     end
 
     private
