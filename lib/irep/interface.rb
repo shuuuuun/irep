@@ -46,7 +46,7 @@ module Irep
       STDIN.gets.chomp
     end
 
-    def self.show_search_results(path:, line:, preview:)
+    def self.show_search_result(path:, line:, preview:)
       puts "\n"
       puts Rainbow("#{path}").lightgreen
       puts "#{Rainbow(line).darkgoldenrod}: #{preview}"

@@ -80,7 +80,7 @@ module Irep
     def show_results
       Interface.error('no search results.') && return if @results.empty?
       @results.each do |result|
-        Interface.show_search_results path: result[:path], line: result[:line], preview: result[:preview]
+        Interface.show_search_result path: result[:path], line: result[:line], preview: result[:preview]
       end
     end
 
