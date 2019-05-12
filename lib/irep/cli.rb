@@ -7,7 +7,9 @@ require 'irep/interface'
 module Irep
   class CLI
     def self.execute(stdout, argv = [])
+      # TODO: 引数が３つのときは最後をpathとして処理したい
       opts, args = parse_options argv
+
       # TODO: implement log level
       # Interface.debug "argv: #{argv}"
       # Interface.debug "opts: #{opts}"

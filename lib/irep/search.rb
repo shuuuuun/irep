@@ -8,6 +8,7 @@ module Irep
       IN_FILE = 2
     end
 
+    # TODO: make Result class.
     attr_reader :results
 
     def initialize(opts = {})

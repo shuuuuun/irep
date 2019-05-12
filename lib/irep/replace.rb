@@ -4,8 +4,8 @@ module Irep
   module Replace
     extend self
 
+    # TODO: replace_immediately
     # def replace_immediately(search_results, search_text, replace_text)
-    #   # TODO: replace_immediately
     # end
 
     def replace_interactively(search_results, search_text, replace_text)
@@ -25,6 +25,7 @@ module Irep
       File.rename path, path.gsub(before, after)
     end
 
+    # TODO: replace_in_file 消してもいいかも
     # def replace_in_file(file_path, before, after='')
     #   txt = File.read(file_path).gsub(before, after)
     #   File.write(file_path, txt)
