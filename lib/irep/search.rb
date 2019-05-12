@@ -2,6 +2,12 @@ require 'irep/interface'
 
 module Irep
   class Search
+    module MatchType
+      DIRECTORY = 0
+      FILENAME = 1
+      IN_FILE = 2
+    end
+
     attr_reader :results
 
     def initialize(opts = {})
@@ -17,7 +23,7 @@ module Irep
       end
       current_results = match_dir_list.map do |path|
         {
-          type: 'directory',
+          type: MatchType::DIRECTORY,
           path: path,
           preview: path,
         }
@@ -31,7 +37,7 @@ module Irep
       end
       current_results = match_file_list.map do |path|
         {
-          type: 'filename',
+          type: MatchType::FILENAME,
           path: path,
           preview: path,
         }
@@ -58,7 +64,7 @@ module Irep
         line_num = match_line_num(file_text, match_data)
         {
           match_data: match_data,
-          type: 'in_file', # in_file, directory, filename
+          type: MatchType::IN_FILE,
           path: file_path, # 'path/to/file_or_directory'
           offset: match_data.begin(0), # x 全体の何文字目か
           line: line_num, # y, row 行数
