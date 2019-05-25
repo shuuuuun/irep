@@ -16,7 +16,7 @@ module Irep
       listened_results = listen_if_replace(search_results)
       replace_in_file listened_results.select(&:in_file?), search_text, replace_text
       listened_results.select { |r| r.filename? || r.dIrectory? }.each do |result|
-        next unless result[:should_replace]
+        next unless result.should_replace
         rename_path result[:path], search_text, replace_text
       end
     end
@@ -37,7 +37,7 @@ module Irep
           next text if text != search_text
           result = results[result_index]
           result_index += 1
-          if result.fetch(:should_replace, false)
+          if result.should_replace
             replace_text
           else
             text
@@ -58,7 +58,7 @@ module Irep
         cmd: 'y',
         help: 'yes, Replace it.',
         func: proc { |result|
-          result[:should_replace] = true
+          result.should_replace = true
         }
       }, {
         cmd: 'n',
@@ -95,7 +95,7 @@ module Irep
           result_preview: result[:result_preview],
           proc_args: [result]
         )
-        result[:should_replace] = true if interface.apply_all_flag
+        result.should_replace = true if interface.apply_all_flag
       end
       results
     end

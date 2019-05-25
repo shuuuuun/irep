@@ -22,6 +22,7 @@ module Irep
     end
 
     attr_reader :type, :path, :preview
+    attr_accessor :should_replace
 
     def initialize(type:, path:, preview:, match_data: nil, offset: nil, line: nil, colmun: nil)
       @type = type
@@ -31,7 +32,7 @@ module Irep
       @offset = offset
       @line = line
       @colmun = colmun
-      # @should_replace
+      @should_replace = false
     end
 
     def directory?
