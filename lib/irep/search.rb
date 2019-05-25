@@ -9,7 +9,6 @@ module Irep
       IN_FILE = 2
     end
 
-    # TODO: make Result class.
     attr_reader :results
 
     def initialize(opts = {})
@@ -28,11 +27,6 @@ module Irep
           path: path,
           preview: path,
         )
-        # {
-        #   type: MatchType::DIRECTORY,
-        #   path: path,
-        #   preview: path,
-        # }
       end
       @results.concat current_results
     end
@@ -46,11 +40,6 @@ module Irep
           path: path,
           preview: path,
         )
-        # {
-        #   type: MatchType::FILENAME,
-        #   path: path,
-        #   preview: path,
-        # }
       end
       @results.concat current_results
     end
@@ -72,19 +61,14 @@ module Irep
       match_data_list = match_global(file_text, @search_text)
       current_results = match_data_list.map do |match_data|
         line_num = match_line_num(file_text, match_data)
-        # Result.initialize_by_in_file(
-        #   path: path,
-        #   preview: path,
-        # )
-        {
-          match_data: match_data,
-          type: MatchType::IN_FILE,
+        Result.initialize_by_in_file(
           path: file_path, # 'path/to/file_or_directory'
+          preview: extract_line(file_text, line_num, 1), # プレビュー表示するテキスト（マッチした行+数行）
+          match_data: match_data,
           offset: match_data.begin(0), # x 全体の何文字目か
           line: line_num, # y, row 行数
           colmun: match_colmun_num(file_text, match_data), # x, colmun その行の何文字目か
-          preview: extract_line(file_text, line_num, 1), # プレビュー表示するテキスト（マッチした行+数行）
-        }
+        )
       end
       @results.concat current_results
     end

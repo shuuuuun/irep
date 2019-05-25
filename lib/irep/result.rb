@@ -7,6 +7,7 @@ module Irep
     end
 
     class << self
+      # TODO: divide class
       def initialize_by_directory(path:, preview:)
         new(type: MatchType::DIRECTORY, path: path, preview: preview)
       end
@@ -16,21 +17,20 @@ module Irep
       end
 
       def initialize_by_in_file(path:, preview:)
-        new(type: MatchType::IN_FILE, path: path, preview: preview)
+        new(type: MatchType::IN_FILE, path: path, preview: preview, match_data: nil, offset: nil, line: nil, colmun: nil)
       end
     end
 
     attr_reader :type, :path, :preview
 
-    def initialize(type:, path:, preview:)
+    def initialize(type:, path:, preview:, match_data: nil, offset: nil, line: nil, colmun: nil)
       @type = type
       @path = path
       @preview = preview
-
-      # @match_data = match_data
-      # @offset = match_data.begin(0) # x 全体の何文字目か
-      # @line = line_num # y, row 行数
-      # @colmun = match_colmun_num(file_text, match_data) # x, colmun その行の何文字目か
+      @match_data = match_data
+      @offset = offset
+      @line = line
+      @colmun = colmun
       # @should_replace
     end
 

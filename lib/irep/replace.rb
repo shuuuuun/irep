@@ -14,8 +14,8 @@ module Irep
         result[:result_preview] = result[:preview].gsub(search_text, replace_text)
       end
       listened_results = listen_if_replace(search_results)
-      replace_in_file listened_results.select { |r| r[:type] == Search::MatchType::IN_FILE }, search_text, replace_text
-      listened_results.select { |r| r[:type] == Search::MatchType::FILENAME || r[:type] == Search::MatchType::DIRECTORY }.each do |result|
+      replace_in_file listened_results.select(&:in_file?), search_text, replace_text
+      listened_results.select { |r| r.filename? || r.dIrectory? }.each do |result|
         next unless result[:should_replace]
         rename_path result[:path], search_text, replace_text
       end
