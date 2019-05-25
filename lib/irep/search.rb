@@ -24,11 +24,15 @@ module Irep
         path.include?(@search_text)
       end
       current_results = match_dir_list.map do |path|
-        {
-          type: MatchType::DIRECTORY,
+        Result.initialize_by_directory(
           path: path,
           preview: path,
-        }
+        )
+        # {
+        #   type: MatchType::DIRECTORY,
+        #   path: path,
+        #   preview: path,
+        # }
       end
       @results.concat current_results
     end
@@ -38,11 +42,15 @@ module Irep
         path.include?(@search_text)
       end
       current_results = match_file_list.map do |path|
-        {
-          type: MatchType::FILENAME,
+        Result.initialize_by_filename(
           path: path,
           preview: path,
-        }
+        )
+        # {
+        #   type: MatchType::FILENAME,
+        #   path: path,
+        #   preview: path,
+        # }
       end
       @results.concat current_results
     end
@@ -64,6 +72,10 @@ module Irep
       match_data_list = match_global(file_text, @search_text)
       current_results = match_data_list.map do |match_data|
         line_num = match_line_num(file_text, match_data)
+        # Result.initialize_by_in_file(
+        #   path: path,
+        #   preview: path,
+        # )
         {
           match_data: match_data,
           type: MatchType::IN_FILE,
