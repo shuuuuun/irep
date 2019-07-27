@@ -17,9 +17,13 @@ module Irep
       @path = opts[:path]
       @search_text = opts[:search_text]
       @delimiter = "\n"
+      @client = Ripgrep::Client.new
     end
 
     def find_directory
+      # $ rg --files --glob '*replace*'
+      # ref. https://github.com/BurntSushi/ripgrep/issues/91
+      # result = @client.exec '--files', '--glob', "*#{@search_text}*", path: @path
       match_dir_list = target_directory_paths.select do |path|
         path.include?(@search_text)
       end
@@ -33,6 +37,7 @@ module Irep
     end
 
     def find_filename
+      # result = @client.exec '--files', '--glob', "*#{@search_text}*", path: @path
       match_file_list = target_file_paths.select do |path|
         path.include?(@search_text)
       end
@@ -52,6 +57,7 @@ module Irep
     end
 
     def find_in_file(file_path)
+      # @client.exec @search_text, path: @path
       file_text = File.read(file_path)
       file_text.force_encoding('UTF-8')
       file_text.scrub!('?')
@@ -85,8 +91,9 @@ module Irep
 
     def target_file_paths
       # TODO: ignore
-      paths = Dir.glob "#{@path}/**/*"
-      paths.reject { |path| File.directory?(path) }
+      # paths = Dir.glob "#{@path}/**/*"
+      # paths.reject { |path| File.directory?(path) }
+      @client.exec('--files', path: @path).lines
     end
 
     def target_directory_paths
