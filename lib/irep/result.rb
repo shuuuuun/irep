@@ -16,8 +16,8 @@ module Irep
         new(type: MatchType::FILENAME, path: path, preview: preview)
       end
 
-      def initialize_by_in_file(path:, preview:)
-        new(type: MatchType::IN_FILE, path: path, preview: preview, match_data: nil, offset: nil, line: nil, colmun: nil)
+      def initialize_by_in_file(path:, preview:, match_data: nil, offset: nil, line: nil, colmun: nil)
+        new(type: MatchType::IN_FILE, path: path, preview: preview, match_data: match_data, offset: offset, line: line, colmun: colmun)
       end
     end
 

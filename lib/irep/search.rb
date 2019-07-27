@@ -1,5 +1,6 @@
 require 'ripgrep'
 require 'irep/interface'
+require 'irep/result'
 
 module Irep
   class Search
