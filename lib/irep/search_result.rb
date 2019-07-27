@@ -1,5 +1,5 @@
 module Irep
-  class Result
+  class SearchResult
     module MatchType
       DIRECTORY = 0
       FILENAME = 1

@@ -24,7 +24,7 @@ module Irep
         path.include?(@search_text)
       end
       current_results = match_dir_list.map do |path|
-        Result.initialize_by_directory(
+        SearchResult.initialize_by_directory(
           path: path,
           preview: path,
         )
@@ -37,7 +37,7 @@ module Irep
         path.include?(@search_text)
       end
       current_results = match_file_list.map do |path|
-        Result.initialize_by_filename(
+        SearchResult.initialize_by_filename(
           path: path,
           preview: path,
         )
@@ -62,7 +62,7 @@ module Irep
       match_data_list = match_global(file_text, @search_text)
       current_results = match_data_list.map do |match_data|
         line_num = match_line_num(file_text, match_data)
-        Result.initialize_by_in_file(
+        SearchResult.initialize_by_in_file(
           path: file_path, # 'path/to/file_or_directory'
           preview: extract_line(file_text, line_num, 1), # プレビュー表示するテキスト（マッチした行+数行）
           match_data: match_data,
