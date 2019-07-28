@@ -93,7 +93,7 @@ module Irep
       # TODO: ignore
       # paths = Dir.glob "#{@path}/**/*"
       # paths.reject { |path| File.directory?(path) }
-      @client.exec('--files', path: @path).lines
+      @client.exec('--files', path: @path).to_a
     end
 
     def target_directory_paths
