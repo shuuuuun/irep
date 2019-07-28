@@ -21,13 +21,14 @@ module Irep
     end
 
     def find_directory
-      # $ rg --files --glob '*replace*'
+      # $ rg --files --glob '**/*ripgrep*/**'
       # ref. https://github.com/BurntSushi/ripgrep/issues/91
-      # result = @client.exec '--files', '--glob', "*#{@search_text}*", path: @path
-      match_dir_list = target_directory_paths.select do |path|
-        path.include?(@search_text)
-      end
-      current_results = match_dir_list.map do |path|
+      result = @client.exec '--files', '--glob', "**/*#{@search_text}*/**", path: @path
+      # match_dir_list = target_directory_paths.select do |path|
+      #   path.include?(@search_text)
+      # end
+      # current_results = match_dir_list.map do |path|
+      current_results = result.to_a.map do |path|
         SearchResult.initialize_by_directory(
           path: path,
           preview: path,
@@ -37,11 +38,13 @@ module Irep
     end
 
     def find_filename
-      # result = @client.exec '--files', '--glob', "*#{@search_text}*", path: @path
-      match_file_list = target_file_paths.select do |path|
-        path.include?(@search_text)
-      end
-      current_results = match_file_list.map do |path|
+      # $ rg --files --glob '*ripgrep*'
+      result = @client.exec '--files', '--glob', "*#{@search_text}*", path: @path
+      # match_file_list = target_file_paths.select do |path|
+      #   path.include?(@search_text)
+      # end
+      # current_results = match_file_list.map do |path|
+      current_results = result.to_a.map do |path|
         SearchResult.initialize_by_filename(
           path: path,
           preview: path,
